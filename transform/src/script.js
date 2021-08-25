@@ -13,8 +13,21 @@ const scene = new THREE.Scene()
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
-mesh.position.z = -4
-mesh.position.x = 3
+
+// Positioning
+// mesh.position.z = -4
+// mesh.position.x = 3
+mesh.position.set(0.5, -4, -2)
+
+// Axis helper
+const axesHelper = new THREE.AxesHelper()
+scene.add(axesHelper)
+
+// Scale = num * current size
+// mesh.scale.x = 2
+// mesh.scale.y = 0.5
+// mesh.scale.z = 0.5
+mesh.scale.set(2, 0.5, 0.5)
 
 scene.add(mesh)
 
@@ -31,8 +44,11 @@ const sizes = {
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 3
+camera.position.y = 1
+camera.position.x = 1
 scene.add(camera)
 
+// length() distanceTo() and normalize() funcs
 console.log(mesh.position.length())
 console.log(mesh.position.distanceTo(camera.position))
 mesh.position.normalize()               // reduces vector to length = 1
