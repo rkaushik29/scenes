@@ -22,3 +22,8 @@ Rotate with ```rotation (Euler obj) or quaternion``` : updating one will update 
 value of axes in radians => Math.PI = 180 deg
 rotation of axes occur in x, y, z order ; gimbal lock -> one axis gets locked for rotn
 use ```object.rotation.reorder('yxz')``` before changing rotation
+
+target.lookAt(vector3) - positions camera s.t -z faces camera
+
+## Group
+inherits from Object3D ; put objs into groups and use position, scale and rotation/quaternion to move the whole group
