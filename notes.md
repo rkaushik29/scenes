@@ -27,3 +27,6 @@ target.lookAt(vector3) - positions camera s.t -z faces camera
 
 ## Group
 inherits from Object3D ; put objs into groups and use position, scale and rotation/quaternion to move the whole group
+
+## Animation
+many pictures every second (fps) together = animation
