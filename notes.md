@@ -9,3 +9,10 @@ rotation (to rotate the object)
 quaternion (to also rotate the object; more about that later)
 ```
 All classes that inherit from the Object3D class possess those properties like PerspectiveCamera or Mesh and classes that we haven't covered yet.
+
+ - units are arbitrary but it is good to decide which units are to be set in the beginning of the project
+ - default axes can be manipulated
+
+```Vector3``` is a class to define 3D objects (args are posn in space)
+
+```Axes Helper``` displays colored lines for axes
