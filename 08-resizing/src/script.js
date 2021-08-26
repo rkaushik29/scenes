@@ -23,9 +23,22 @@ scene.add(mesh)
  * Sizes
  */
 const sizes = {
-    width: 800,
-    height: 600
+   width: window.innerWidth,
+   height: window.innerHeight
 }
+
+// Resize event listener
+window.addEventListener('resize', () => {
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // update camera
+    camera.aspect = sizes.width / sizes.height      // inform 3js to update projection matrix
+    camera.updateProjectionMatrix()
+
+    // update renderer
+    renderer.setSize(sizes.width, sizes.height)
+})
 
 /**
  * Camera
