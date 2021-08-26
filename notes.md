@@ -44,3 +44,8 @@ PerspectiveCamera - params: field of view (angle in deg: 45-75 usually), aspect 
  - FlyControls - spaceship movement
  - FirstPersonControl - no 2d rotation movement
  - PointerLockControl - look around from a point - move f,b,l,r
+ - OrbitControl
+ - TrackballControl
+ - TransformControl - move objects using input in space
+
+ Damping : smooth movement ```controls.enableDamping = true```
