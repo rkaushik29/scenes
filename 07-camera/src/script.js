@@ -1,6 +1,16 @@
 import './style.css'
 import * as THREE from 'three'
 
+// Cursor
+const cursor = {
+    x: 0,
+    y: 0
+}
+window.addEventListener('mousemove', (event) => {
+    cursor.x = event.clientX / sizes.width - 0.5              // goes from -0.5 - 0.5 based on varying screen size
+    cursor.y = event.clientY / sizes.height - 0.5
+})
+
 /**
  * Base
  */
@@ -25,9 +35,9 @@ scene.add(mesh)
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.x = 2
-camera.position.y = 2
-camera.position.z = 2
+// camera.position.x = 2
+// camera.position.y = 2
+camera.position.z = 3
 camera.lookAt(mesh.position)
 scene.add(camera)
 
@@ -45,7 +55,14 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
-    mesh.rotation.y = elapsedTime;
+    // mesh.rotation.y = elapsedTime;
+
+    // Update Camera
+    camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 3           // * x == amplitude of movement
+    camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 3
+    camera.position.y = cursor.y * 5
+    camera.lookAt(mesh.position)
+
 
     // Render
     renderer.render(scene, camera)

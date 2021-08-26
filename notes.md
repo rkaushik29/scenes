@@ -30,3 +30,17 @@ inherits from Object3D ; put objs into groups and use position, scale and rotati
 
 ## Animation
 many pictures every second (fps) together = animation
+
+## Cameras
+StereoCamera for using 2 cameras - parallax effect / red+blue lenses - vr headsets (mimic eyes)
+Cube cameras - 6 cameras - render surroundings : refraction reflection etc.
+OrthographicCamera - render scene without perspective
+PerspectiveCamera - params: field of view (angle in deg: 45-75 usually), aspect ratio (width / height of render), near, far 
+ - any objects closer than near and farther than far will not be visible
+ - in orthographic camera, the size of obj will be same regardless of dist from camera (square fov not conical)
+
+## Built-in controls
+ - DeviceOrientationControls
+ - FlyControls - spaceship movement
+ - FirstPersonControl - no 2d rotation movement
+ - PointerLockControl - look around from a point - move f,b,l,r
