@@ -5,19 +5,16 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 // texture
 const loadingManager = new THREE.LoadingManager()
 const textureLoader = new THREE.TextureLoader(loadingManager)
-const colorTexture = textureLoader.load(
-    '/textures/door/color.jpg',
-    () => {
-        console.log('load function')
-    },
-    () => {
-        console.log('load in progress')
-    },
-    () => {
-        console.log('func for error')
-    }
-)
-
+const colorTexture = textureLoader.load('/textures/checkerboard-1024x1024.png')
+colorTexture.repeat.x = 2
+colorTexture.repeat.y = 3
+colorTexture.wrapS = THREE.RepeatWrapping               // repeat itself on x-axis
+colorTexture.wrapT = THREE.RepeatWrapping               // repeat itself on y-axis
+colorTexture.rotation = Math.PI * 0.25
+colorTexture.center.x = 0.5
+colorTexture.center.y = 0.5
+colorTexture.minFilter = THREE.NearestFilter
+colorTexture.magFilter = THREE.NearestFilter
 /**
  * Base
  */

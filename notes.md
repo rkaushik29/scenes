@@ -61,3 +61,15 @@ They are images rendered on objects
  - LoadingManager mutualizes multiple events : useful to monitor global loading process
 
  - UV unwrapping maps each vertex to 2 co-ordinates on a 2D plane
+ - minFilter when texture is too big for surface
+ - magFilter when texture is small for surface
+ - NearestFiler is best for performance
+ - No mipmappings neeeded when using minFilter with NearestFilter
+ - 3 texture chars : weight (file wt) , size (resolution) , data in img.
+    - jpg is lighter (lossy compression) ; png is heavier (lossless compression)
+    - mipmapping increases num of pixels to store
+    - no transparency in jpg but can do it in png
+ - find textures at:
+    - poliigon.com
+    - 3dtextures.me
+    - arroway-textures.ch
