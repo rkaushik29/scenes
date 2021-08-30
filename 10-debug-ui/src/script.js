@@ -2,12 +2,18 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
+import * as dat from 'dat.gui'
 
 /**
  * Base
  */
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
+
+// Debug UI
+
+const gui = new dat.GUI()
+
 
 // Scene
 const scene = new THREE.Scene()
