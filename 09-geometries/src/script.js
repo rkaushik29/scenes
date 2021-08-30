@@ -12,14 +12,12 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Object
-const positionsArray = new Float32Array([
-    0, 0, 0,
-    0, 1, 0,
-    1, 0, 0
-])
-
-const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)     // '3' specifies number of dimensions of each vertex
-
+const count = 6000
+const positionsArray = new Float32Array(count * 3 * 3) // 3 vertices and 3 dims per vertex for each triangle
+for (let i = 0; i < count * 3 * 3; ++i) {
+    positionsArray[i] = Math.random() * 6
+}
+const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3)
 const geometry = new THREE.BufferGeometry()
 geometry.setAttribute('position', positionsAttribute)
 
