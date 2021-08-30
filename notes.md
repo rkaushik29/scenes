@@ -58,3 +58,6 @@ Blurry renders and steps on shape edges are visible due to pixel ratio > 1 on vi
 They are images rendered on objects
  - follow PBR principles : Physically based rendering
  - Use textureLoaders to load textures; multiple textures can be loaded with one loader
+ - LoadingManager mutualizes multiple events : useful to monitor global loading process
+
+ - UV unwrapping maps each vertex to 2 co-ordinates on a 2D plane
