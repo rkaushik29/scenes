@@ -15,12 +15,18 @@ const canvas = document.querySelector('canvas.webgl')
 const gui = new dat.GUI()
 
 const parameters = {
-    color: 0xfffeee
+    color: 0xfffeee,
+    spin: () => {
+        gsap.to(mesh.rotation, { duration: 2, y: mesh.rotation.y + 10 })
+    }
 }
 
 gui.addColor(parameters, 'color').onChange(() => {
     material.color.set(parameters.color)
 })
+
+gui.add(parameters, 'spin')
+
 // Scene
 const scene = new THREE.Scene()
 
