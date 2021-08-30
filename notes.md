@@ -53,3 +53,7 @@ PerspectiveCamera - params: field of view (angle in deg: 45-75 usually), aspect 
 ## Resizing
 Do this using an event listener and set canvas dimensions to current dimensions, as well as update renderer dimensions
 Blurry renders and steps on shape edges are visible due to pixel ratio > 1 on viewport
+
+## Textures
+They are images rendered on objects
+ - follow PBR principles : Physically based rendering
