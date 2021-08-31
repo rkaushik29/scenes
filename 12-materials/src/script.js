@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { AmbientLight } from 'three'
 
 /**
  * Base
@@ -20,15 +21,16 @@ const canvas = document.querySelector('canvas.webgl')
  const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
  const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
  const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
- const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
+ const matcapTexture = textureLoader.load('/textures/matcaps/2.png')
  const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
 
 
 // Objects
-const material = new THREE.MeshNormalMaterial({ map: doorColorTexture })
-material.flatShading = true
-material.matcap = matcapTexture
-
+// const material = new THREE.MeshDepthMaterial()
+// material.matcap = matcapTexture
+const material = new THREE.MeshStandardMaterial()
+material.metalness = 0.45
+material.roughness = 0.65
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 16, 16),
     material
@@ -49,6 +51,15 @@ torus.position.x = 1.5
 // Scene
 const scene = new THREE.Scene()
 scene.add(sphere, plane, torus)         // multi-add in one call
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+scene.add(ambientLight)
+const pointLight = new THREE.PointLight(0xffffff, 0.5)
+pointLight.position.x = 2
+pointLight.position.y = 3
+pointLight.position.z = 4
+scene.add(pointLight)
+
 
 /**
  * Sizes
