@@ -79,3 +79,5 @@ They are images rendered on objects
 Materials are used to put a color on each visible pixel of the geometries.
 
 The algorithms that decide on the color of each pixel are written in programs called shaders.
+
+## 3D Text
