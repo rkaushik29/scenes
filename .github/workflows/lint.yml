@@ -1,0 +1,16 @@
+
+name: Linter
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: js lint
+        uses: wearerequired/lint-action@v1.10.0
