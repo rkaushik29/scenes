@@ -20,6 +20,9 @@ const scene = new THREE.Scene()
  */
 const textureLoader = new THREE.TextureLoader()
 
+// Material
+const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
+
 // fontloader
 const fontLoader = new THREE.FontLoader()
 
@@ -28,7 +31,7 @@ fontLoader.load(
     (font) =>
     {
         const textGeometry = new THREE.TextGeometry(
-            'Hello Three.js',
+            '3.js',
             {
                 font: font,
                 size: 0.5,
@@ -41,16 +44,20 @@ fontLoader.load(
                 bevelSegments: 5
             }
         )
-        const textMaterial = new THREE.MeshBasicMaterial({ wireframe: true })
+        const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
         textGeometry.computeBoundingBox()
-        textGeometry.translate(
-            - (textGeometry.boundingBox.max.x - 0.02) * 0.5, // Subtract bevel size
-            - (textGeometry.boundingBox.max.y - 0.02) * 0.5, // Subtract bevel size
-            - (textGeometry.boundingBox.max.z - 0.03) * 0.5  // Subtract bevel thickness
-        )
+        textGeometry.center()
         const text = new THREE.Mesh(textGeometry, textMaterial)
         scene.add(text)
-    }
+
+        // random shapes
+        for(let i = 0; i < 100; i++) {
+            const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+            const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
+            const donut = new THREE.Mesh(donutGeometry, donutMaterial)
+            scene.add(donut)
+        }
+    },
 )
 
 /**
