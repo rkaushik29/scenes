@@ -21,17 +21,21 @@ const scene = new THREE.Scene()
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 scene.add(ambientLight)
 
-const pointLight = new THREE.PointLight(0xffffff, 0.5)
-pointLight.position.x = 2
-pointLight.position.y = 3
-pointLight.position.z = 4
+const directionalLight = new THREE.DirectionalLight(0xa76b32, 0.6)
+directionalLight.position.set(1, 0.25, 0)
+scene.add(directionalLight)
+
+const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.3)
+scene.add(hemisphereLight)
+
+const pointLight = new THREE.PointLight(0xff9000, 0.5)
 scene.add(pointLight)
 
 /**
  * Objects
  */
 // Material
-const material = new THREE.MeshStandardMaterial()
+const material = new THREE.MeshStandardMaterial({ wireframe: true })
 material.roughness = 0.4
 
 // Objects
