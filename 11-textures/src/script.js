@@ -27,10 +27,25 @@ const scene = new THREE.Scene()
 /**
  * Object
  */
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ map: colorTexture })
-const mesh = new THREE.Mesh(geometry, material)
-scene.add(mesh)
+ const curve = new THREE.CubicBezierCurve(
+	new THREE.Vector2( -10, 0 ),
+	new THREE.Vector2( -5, 15 ),
+	new THREE.Vector2( 20, 15 ),
+	new THREE.Vector2( 10, 0 )
+);
+
+const points = curve.getPoints( 50 );
+const geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+
+// Create the final object to add to the scene
+const curveObject = new THREE.Line( geometry, material );
+
+scene.add(curveObject)
+
+
+
 
 /**
  * Sizes
