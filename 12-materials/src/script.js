@@ -1,7 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { AmbientLight } from 'three'
+import * as dat from 'dat.gui'
 
 /**
  * Base
@@ -12,41 +12,66 @@ const canvas = document.querySelector('canvas.webgl')
 /**
  * Textures
  */
- const textureLoader = new THREE.TextureLoader()
+//  const textureLoader = new THREE.TextureLoader()
 
- const doorColorTexture = textureLoader.load('/textures/door/color.jpg')
- const doorAlphaTexture = textureLoader.load('/textures/door/alpha.jpg')
- const doorAmbientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
- const doorHeightTexture = textureLoader.load('/textures/door/height.jpg')
- const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
- const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
- const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
- const matcapTexture = textureLoader.load('/textures/matcaps/2.png')
- const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
+//  const doorColorTexture = textureLoader.load('/textures/door/color.jpg')
+//  const doorAlphaTexture = textureLoader.load('/textures/door/alpha.jpg')
+//  const doorAmbientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
+//  const doorHeightTexture = textureLoader.load('/textures/door/height.jpg')
+//  const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
+//  const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
+//  const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
+//  const matcapTexture = textureLoader.load('/textures/matcaps/2.png')
+//  const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
 
 
 // Objects
-// const material = new THREE.MeshDepthMaterial()
-// material.matcap = matcapTexture
+const cubeTextureLoader = new THREE.CubeTextureLoader()
+
+const environmentMapTexture = cubeTextureLoader.load([
+    '/textures/environmentMaps/0/px.jpg',
+    '/textures/environmentMaps/0/nx.jpg',
+    '/textures/environmentMaps/0/py.jpg',
+    '/textures/environmentMaps/0/ny.jpg',
+    '/textures/environmentMaps/0/pz.jpg',
+    '/textures/environmentMaps/0/nz.jpg'
+])
+
 const material = new THREE.MeshStandardMaterial()
-material.metalness = 0.45
-material.roughness = 0.65
+material.metalness = 0.3
+material.roughness = 1.7
+material.metalnessMap = doorMetalnessTexture
+material.roughnessMap = doorRoughnessTexture
+material.aoMap = doorAmbientOcclusionTexture
+material.normalMap = doorNormalTexture
+material.aoMapIntensity = 1
+material.displacementMap = doorHeightTexture
+material.displacementScale = 0.05
+material.normalScale.set(0.5, 0.5)
+material.transparent = true
+material.alphaMap = doorAlphaTexture
+material.envMap = environmentMapTexture
+
 const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(0.5, 16, 16),
+    new THREE.SphereGeometry(0.5, 64, 64),
     material
 )
 sphere.position.x = - 1.5
 
 const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1),
+    new THREE.PlaneGeometry(1, 1, 100, 100),
     material
 )
 
 const torus = new THREE.Mesh(
-    new THREE.TorusGeometry(0.3, 0.2, 16, 32),
+    new THREE.TorusGeometry(0.3, 0.2, 64, 128),
     material
 )
 torus.position.x = 1.5
+
+sphere.geometry.setAttribute('uv2', new THREE.BufferAttribute(sphere.geometry.attributes.uv.array, 2))
+plane.geometry.setAttribute('uv2', new THREE.BufferAttribute(plane.geometry.attributes.uv.array, 2))
+torus.geometry.setAttribute('uv2', new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2))
 
 // Scene
 const scene = new THREE.Scene()
@@ -60,7 +85,11 @@ pointLight.position.y = 3
 pointLight.position.z = 4
 scene.add(pointLight)
 
-
+// Debug UI
+const gui = new dat.GUI()
+gui.add(material, 'metalness').min(0).max(1).step(0.0001)
+gui.add(material, 'roughness').min(0).max(1).step(0.0001)
+material.map = doorColorTexture
 /**
  * Sizes
  */
