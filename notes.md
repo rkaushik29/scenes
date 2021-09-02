@@ -107,3 +107,9 @@ Optimization:
 
 shadows can be casted or recieved and they need to be activatede on the renderer.
 a shadow map is created which creates a texture based on how each light sees the objects. 
+
+Optimizations:
+ - Set smaller values for near and far of camera
+ - change amplitude
+ - adjust blur
+ - increase render size
