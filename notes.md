@@ -106,3 +106,4 @@ Optimization:
  - drop shadow: shadow of one obj on another
 
 shadows can be casted or recieved and they need to be activatede on the renderer.
+a shadow map is created which creates a texture based on how each light sees the objects. 
