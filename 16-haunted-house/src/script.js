@@ -103,18 +103,22 @@ const bushMaterial = new THREE.MeshStandardMaterial({ color: '#89c854' })
 const bush1 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush1.scale.set(0.5, 0.5, 0.5)
 bush1.position.set(0.8, 0.2, 2.2)
+bush1.castShadow = true
 
 const bush2 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush2.scale.set(0.25, 0.25, 0.25)
 bush2.position.set(1.4, 0.1, 2.1)
+bush2.castShadow = true
 
 const bush3 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush3.scale.set(0.4, 0.4, 0.4)
 bush3.position.set(- 0.8, 0.1, 2.2)
+bush3.castShadow = true
 
 const bush4 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush4.scale.set(0.15, 0.15, 0.15)
 bush4.position.set(- 1, 0.05, 2.6)
+bush4.castShadow = true
 
 house.add(bush1, bush2, bush3, bush4)
 
@@ -136,7 +140,8 @@ for(let i = 0; i < 50; i++)
     const grave = new THREE.Mesh(graveGeometry, graveMaterial)
 
     // Position
-    grave.position.set(x, 0.3, z)                              
+    grave.position.set(x, 0.3, z)      
+    grave.castShadow = true                        
 
     // Rotation
     grave.rotation.z = (Math.random() - 0.5) * 0.4
@@ -159,6 +164,7 @@ const floor = new THREE.Mesh(
 floor.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(floor.geometry.attributes.uv.array, 2))
 floor.rotation.x = - Math.PI * 0.5
 floor.position.y = 0
+floor.receiveShadow = true
 scene.add(floor)
 
 /**
@@ -166,14 +172,23 @@ scene.add(floor)
  */
  const ghost1 = new THREE.PointLight('#ff00ff', 2, 3)
  ghost1.castShadow = true
+ ghost1.shadow.mapSize.width = 256
+ ghost1.shadow.mapSize.height = 256
+ ghost1.shadow.camera.far = 7
  scene.add(ghost1)
  
  const ghost2 = new THREE.PointLight('#00ffff', 2, 3)
  ghost2.castShadow = true
+ ghost2.shadow.mapSize.width = 256
+ ghost2.shadow.mapSize.height = 256
+ ghost2.shadow.camera.far = 7
  scene.add(ghost2)
  
  const ghost3 = new THREE.PointLight('#ffff00', 2, 3)
  ghost3.castShadow = true
+ ghost3.shadow.mapSize.width = 256
+ ghost3.shadow.mapSize.height = 256
+ ghost3.shadow.camera.far = 7
  scene.add(ghost3)
 
 /**
@@ -187,6 +202,9 @@ scene.add(ambientLight)
 // Directional light
 const moonLight = new THREE.DirectionalLight('#b9d5ff', 0.12)
 moonLight.position.set(4, 5, - 2)
+moonLight.shadow.mapSize.width = 256
+moonLight.shadow.mapSize.height = 256
+moonLight.shadow.camera.far = 15
 gui.add(moonLight, 'intensity').min(0).max(1).step(0.001)
 gui.add(moonLight.position, 'x').min(- 5).max(5).step(0.001)
 gui.add(moonLight.position, 'y').min(- 5).max(5).step(0.001)
@@ -198,7 +216,9 @@ scene.add(moonLight)
 const doorLight = new THREE.PointLight('#ff7d46', 1, 7)
 doorLight.position.set(0, 2.2, 2.7)
 doorLight.castShadow = true
-
+doorLight.shadow.mapSize.width = 256
+doorLight.shadow.mapSize.height = 256
+doorLight.shadow.camera.far = 7
 house.add(doorLight)
 
 /**
@@ -253,6 +273,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.setClearColor('#262837')
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.shadowMap.enabled = true
 
 
