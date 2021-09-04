@@ -16,6 +16,17 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 /**
+ * Raycaster
+ */
+ const raycaster = new THREE.Raycaster()
+
+const rayOrigin = new THREE.Vector3(- 3, 0, 0)
+const rayDirection = new THREE.Vector3(10, 0, 0)
+rayDirection.normalize()
+
+raycaster.set(rayOrigin, rayDirection)
+
+/**
  * Objects
  */
 const object1 = new THREE.Mesh(
