@@ -9,6 +9,8 @@ import * as dat from 'dat.gui'
 // Debug
 const gui = new dat.GUI()
 
+let currentIntersect = null
+
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -20,7 +22,12 @@ const scene = new THREE.Scene()
  */
 const raycaster = new THREE.Raycaster()
 
+const mouse = new THREE.Vector2()
 
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.clientX / sizes.width * 2 - 1
+    mouse.y = - (event.clientY / sizes.height) * 2 + 1
+})
 
 /**
  * Objects
@@ -67,6 +74,27 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+window.addEventListener('click', () =>
+{
+    if(currentIntersect)
+    {
+        switch(currentIntersect.object)
+        {
+            case object1:
+                console.log('click on object 1')
+                break
+
+            case object2:
+                console.log('click on object 2')
+                break
+
+            case object3:
+                console.log('click on object 3')
+                break
+        }
+    }
+})
+
 /**
  * Camera
  */
@@ -102,7 +130,7 @@ const tick = () =>
     const rayDirection = new THREE.Vector3(1, 0, 0)
     rayDirection.normalize()
 
-    raycaster.set(rayOrigin, rayDirection)
+    raycaster.setFromCamera(mouse, camera)
 
     const objectsToTest = [object1, object2, object3]
     const intersects = raycaster.intersectObjects(objectsToTest)
@@ -115,6 +143,8 @@ const tick = () =>
     {
         intersect.object.material.color.set('#0000ff')
     }
+
+  
 
     // Animate objects
     object1.position.y = Math.sin(elapsedTime * 0.3) * 1.5
