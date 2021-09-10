@@ -116,3 +116,10 @@ Optimizations:
 
 Point Light Shadow
 Because the point light illuminates in every direction, Three.js will have to render each of the 6 directions to create a cube shadow map. The camera helper you see is the camera's position in the last of those 6 renders (which is downward).
+
+## Physics
+Libraries:
+ - Ammo.js
+ - Cannon.js
+ - Oimo.js
+ 
