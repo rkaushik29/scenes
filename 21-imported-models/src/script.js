@@ -19,6 +19,15 @@ const scene = new THREE.Scene()
 // Models
 const gltfLoader = new GLTFLoader()
 
+gltfLoader.load(
+    '/models/FlightHelmet/glTF/FlightHelmet.gltf',
+    (gltf) => {
+        while(gltf.scene.children.length) {
+            scene.add(gltf.scene.children[0])               // Alt sol: duplicate children array with const children = [...gltf.scene.children] : spread operator
+        }
+    }
+)
+
 /**
  * Floor
  */
