@@ -20,11 +20,12 @@ const scene = new THREE.Scene()
 const gltfLoader = new GLTFLoader()
 
 gltfLoader.load(
-    '/models/FlightHelmet/glTF/FlightHelmet.gltf',
+    '/models/Duck/glTF-Draco/Duck.gltf',
     (gltf) => {
-        while(gltf.scene.children.length) {
-            scene.add(gltf.scene.children[0])               // Alt sol: duplicate children array with const children = [...gltf.scene.children] : spread operator
-        }
+        // while(gltf.scene.children.length) {
+        //     scene.add(gltf.scene.children[0])               // Alt sol: duplicate children array with const children = [...gltf.scene.children] : spread operator
+        // }
+        scene.add(gltf.scene)
     }
 )
 
